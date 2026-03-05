@@ -265,22 +265,10 @@
       white-space: nowrap;
       display: inline-block;
     }
-    .badge-sin-stock {
-      background: #666;
-      color: white;
-    }
-    .badge-critico {
-      background: #F44336;
-      color: white;
-    }
-    .badge-medio {
-      background: #FF9800;
-      color: white;
-    }
-    .badge-ok {
-      background: #4CAF50;
-      color: white;
-    }
+    .badge-sin-stock { background: #666; color: white; }
+    .badge-critico { background: #F44336; color: white; }
+    .badge-medio { background: #FF9800; color: white; }
+    .badge-ok { background: #4CAF50; color: white; }
 
     /* ===== ESTILOS DÍAS SIN COMPRAR ===== */
     .dias-section {
@@ -298,30 +286,39 @@
       margin-bottom: 16px;
       font-weight: 600;
     }
+    /* ✅ CAMBIO: block en vez de flex para que vaya uno debajo del otro */
     .dias-grid {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
+      display: block;
+      width: 100%;
     }
     .dias-col {
-      flex: 1;
-      min-width: 280px;
+      width: 100%;
+      margin-bottom: 20px;
     }
     .dias-col-titulo {
       font-size: 13px;
       font-weight: 600;
       color: #8A7A6A;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
-    /* 👇 SCROLL: altura máxima para ~10 filas, scroll vertical */
+    .dias-nota {
+      font-size: 10px;
+      color: #8A7A6A;
+      margin-bottom: 8px;
+      font-style: italic;
+      padding-left: 2px;
+    }
+    /* ✅ CAMBIO: scroll horizontal oculto */
     .dias-scroll-wrapper {
       max-height: 330px;
       overflow-y: auto;
+      overflow-x: auto;
       border: 1px solid #F2EFE9;
       border-radius: 6px;
     }
     .dias-scroll-wrapper::-webkit-scrollbar {
       width: 6px;
+      height: 0px;
     }
     .dias-scroll-wrapper::-webkit-scrollbar-track {
       background: #F9F7F4;
@@ -335,7 +332,6 @@
       width: 100% !important;
       box-shadow: none !important;
     }
-    /* Header sticky dentro del scroll */
     .dias-table thead th {
       position: sticky;
       top: 0;
@@ -367,9 +363,7 @@
       color: #8A7A6A;
       border-top: 1px solid #F2EFE9;
     }
-    .footer p {
-      margin: 3px 0;
-    }
+    .footer p { margin: 3px 0; }
     .footer .empresa {
       font-weight: 700;
       font-size: 12px;
@@ -378,52 +372,18 @@
     }
     
     @media (max-width: 768px) {
-      body {
-        padding: 8px;
-        font-size: 12px;
-      }
-      .container {
-        border-radius: 0;
-      }
-      .header {
-        padding: 15px 12px;
-      }
-      .header h1 {
-        font-size: 16px;
-      }
-      .header .total {
-        font-size: 14px;
-        padding: 6px 16px;
-      }
-      .content {
-        padding: 15px 12px;
-      }
-      .vendedor-header {
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
-        padding: 12px 16px;
-      }
-      .tabla-container {
-        padding: 12px;
-      }
-      .table-wrapper {
-        border: 1px solid #F2EFE9;
-        border-radius: 6px;
-      }
-      table {
-        font-size: 11px;
-        min-width: 650px;
-      }
-      table.tendencias {
-        min-width: 500px;
-      }
-      .stock-section {
-        padding: 15px;
-      }
-      .dias-grid {
-        flex-direction: column;
-      }
+      body { padding: 8px; font-size: 12px; }
+      .container { border-radius: 0; }
+      .header { padding: 15px 12px; }
+      .header h1 { font-size: 16px; }
+      .header .total { font-size: 14px; padding: 6px 16px; }
+      .content { padding: 15px 12px; }
+      .vendedor-header { flex-direction: column; gap: 8px; text-align: center; padding: 12px 16px; }
+      .tabla-container { padding: 12px; }
+      .table-wrapper { border: 1px solid #F2EFE9; border-radius: 6px; }
+      table { font-size: 11px; min-width: 650px; }
+      table.tendencias { min-width: 500px; }
+      .stock-section { padding: 15px; }
     }
   </style>
 </head>
@@ -993,22 +953,20 @@
         <h2 class="dias-header">⏰ CLIENTES Y PRODUCTOS SIN ACTIVIDAD (MÁS DE 15 DÍAS)</h2>
         <div class="dias-grid">
 
-      <div class="dias-col">
-        <div class="dias-col-titulo">👥 Clientes sin comprar (107)</div>
-        <div style="padding: 6px 12px; font-size: 10px; color: #8A7A6A; background: #FFFBF5; border-bottom: 1px solid #F2EFE9; font-style: italic;">
-          %VENTAS = Ventas del cliente en su último mes activo ÷ total general de ese mismo mes × 100
-        </div>
-        <div class="dias-scroll-wrapper">
-          <table class="dias-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>CLIENTE</th>
-                <th class="porcentaje">% VENTAS</th>
-                <th class="numero">DÍAS SIN COMPRAR</th>
-              </tr>
-            </thead>
-            <tbody>
+          <div class="dias-col">
+            <div class="dias-col-titulo">👥 Clientes sin comprar (107)</div>
+            <div class="dias-nota">%VENTAS = Ventas del cliente en su último mes activo ÷ total general de ese mismo mes × 100</div>
+            <div class="dias-scroll-wrapper">
+              <table class="dias-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>CLIENTE</th>
+                    <th class="porcentaje">% VENTAS</th>
+                    <th class="numero">DÍAS SIN COMPRAR</th>
+                  </tr>
+                </thead>
+                <tbody>
 
                   <tr>
                     <td>1</td>
